@@ -92,7 +92,45 @@ p.sub { font-size: 1rem; color: #6b7280; max-width: 560px; line-height: 1.8; mar
 .pc-item .em { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
 .pc-item h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.2rem; }
 .pc-item p { font-size: 0.82rem; color: #6b7280; line-height: 1.6; }
-.pricing-note { display: inline-flex; align-items: center; gap: 0.6rem; background: #fefce8; border: 1px solid #fde68a; border-radius: 10px; padding: 0.75rem 1.2rem; font-size: 0.88rem; color: #92400e; font-weight: 500; margin-bottom: 2.5rem; }
+.pricing-how { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; padding: 2.5rem; margin-bottom: 2.5rem; }
+.pricing-how h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.8rem; color: #111827; }
+.pricing-how > p { font-size: 0.95rem; color: #6b7280; line-height: 1.8; margin-bottom: 2rem; }
+.pricing-scale { display: grid; grid-template-columns: 1fr 30px 1fr 30px 1fr; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+.scale-item { border-radius: 12px; padding: 1.5rem; border: 1.5px solid #e5e7eb; }
+.scale-item.low { background: #f0fdf4; border-color: #bbf7d0; }
+.scale-item.mid { background: #eff6ff; border-color: #bfdbfe; }
+.scale-item.high { background: #fefce8; border-color: #fde68a; }
+.scale-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7280; margin-bottom: 0.4rem; }
+.scale-rate { font-size: 1.2rem; font-weight: 800; color: #111827; margin-bottom: 0.5rem; }
+.scale-item.low .scale-rate { color: #16a34a; }
+.scale-item.mid .scale-rate { color: #2563eb; }
+.scale-item.high .scale-rate { color: #d97706; }
+.scale-desc { font-size: 0.8rem; color: #6b7280; line-height: 1.6; }
+.scale-arrow { text-align: center; font-size: 1.2rem; color: #9ca3af; font-weight: 700; }
+.scale-note { font-size: 0.85rem; color: #6b7280; font-style: italic; }
+.examples-section { margin-bottom: 2.5rem; }
+.examples-section h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.8rem; color: #111827; }
+.examples-section > p { font-size: 0.95rem; color: #6b7280; line-height: 1.8; margin-bottom: 2rem; }
+.examples-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+.example-card { background: #f9fafb; border: 1.5px solid #e5e7eb; border-radius: 16px; padding: 2rem; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
+.example-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+.example-card.featured-ex { background: #fff; border-color: #2563eb; }
+.ex-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #2563eb; color: #fff; font-size: 0.68rem; font-weight: 700; padding: 0.25rem 0.8rem; border-radius: 20px; white-space: nowrap; }
+.ex-rate { font-size: 2.2rem; font-weight: 800; color: #111827; line-height: 1; margin-bottom: 0.3rem; }
+.ex-rate span { font-size: 1rem; font-weight: 400; color: #6b7280; }
+.ex-label { font-size: 0.78rem; font-weight: 600; color: #6b7280; margin-bottom: 1.2rem; padding-bottom: 1rem; border-bottom: 1px solid #e5e7eb; }
+.ex-calc { font-size: 0.85rem; color: #374151; line-height: 1.8; margin-bottom: 0.8rem; }
+.ex-calc strong { color: #111827; font-size: 1rem; }
+.ex-compare { font-size: 0.78rem; color: #9ca3af; margin-bottom: 0.5rem; }
+.ex-saving { font-size: 0.85rem; font-weight: 700; color: #16a34a; background: #f0fdf4; border-radius: 6px; padding: 0.4rem 0.7rem; display: inline-block; }
+.included-section { margin-bottom: 2.5rem; }
+.included-section h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 1.5rem; color: #111827; }
+.included-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.inc-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; }
+.inc-icon { font-size: 1.4rem; flex-shrink: 0; }
+.inc-card h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.2rem; }
+.inc-card p { font-size: 0.8rem; color: #6b7280; line-height: 1.6; }
+@media (max-width: 768px) { .pricing-scale { grid-template-columns: 1fr; } .scale-arrow { display: none; } }
 .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
 .pcard { background: #f9fafb; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 2.5rem; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
 .pcard:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
@@ -189,7 +227,7 @@ footer a { color: #2563eb; text-decoration: none; }
     <a href="#compare" class="btn-white">See the cost savings →</a>
   </div>
   <div class="hero-stats">
-    <div class="stat"><div class="num">$0.10<span>–$0.80</span></div><div class="lbl">Per minute of AI call</div></div>
+    <div class="stat"><div class="num">$0.10<span>+</span></div><div class="lbl">Starting per minute — scales with your needs</div></div>
     <div class="stat"><div class="num">24<span>/7</span></div><div class="lbl">Always available</div></div>
     <div class="stat"><div class="num">$500</div><div class="lbl">One-time setup — that's it</div></div>
     <div class="stat"><div class="num">0</div><div class="lbl">Sick days. Ever.</div></div>
@@ -266,7 +304,7 @@ footer a { color: #2563eb; text-decoration: none; }
       <div class="pc-head">✅ &nbsp; Strengths of an AI Assistant</div>
       <div class="pc-body">
         <div class="pc-item"><div class="em">⚡</div><div><h4>Always Available, 24/7</h4><p>Answers calls at 11pm on a Sunday. Every missed call after hours is a missed customer — your AI makes sure that never happens.</p></div></div>
-        <div class="pc-item"><div class="em">💰</div><div><h4>Saves Thousands Every Month</h4><p>At $0.10–$0.80 per minute, even a high-call-volume business saves $2,000+ per month vs full-time staff.</p></div></div>
+        <div class="pc-item"><div class="em">💰</div><div><h4>Saves Thousands Every Month</h4><p>Starting from just $0.10 per minute, even a high-call-volume business saves $2,000+ per month compared to full-time staff.</p></div></div>
         <div class="pc-item"><div class="em">🎯</div><div><h4>100% Consistent Every Time</h4><p>No bad days, no forgetting scripts. Every caller gets the same professional, friendly experience.</p></div></div>
         <div class="pc-item"><div class="em">📈</div><div><h4>Scales With Your Business</h4><p>Busy period? Your AI handles 10 calls at once without any extra hiring or cost.</p></div></div>
         <div class="pc-item"><div class="em">⚙️</div><div><h4>No Management Needed</h4><p>No HR, no payroll, no performance reviews. Set it up once and it runs itself.</p></div></div>
@@ -289,67 +327,98 @@ footer a { color: #2563eb; text-decoration: none; }
 
 <section id="pricing">
   <div class="tag reveal">Pricing</div>
-  <h2 class="h reveal">Simple, Transparent Pricing</h2>
-  <p class="sub reveal">All plans include a one-time $500 setup fee. After that, you only pay per minute your AI is on a call. No monthly retainer, no hidden costs, no surprises.</p>
-  <div class="pricing-note reveal">💡 The $500 setup fee is paid once — yours forever. After that you only pay for what you use.</div>
-  <div class="pricing-grid">
-    <div class="pcard reveal">
-      <div class="plan-name">Basic</div>
-      <div class="plan-price"><sup>$</sup>0.10<sub>/min</sub></div>
-      <div class="plan-unit">Per minute of AI call time</div>
-      <div class="plan-setup">🔧 + $500 one-time setup fee</div>
-      <div class="plan-desc">Great for small businesses with moderate call volume. Covers the essentials — answering, FAQs, and lead collection.</div>
-      <ul class="plan-feats">
-        <li><span class="ck">✓</span> 24/7 call answering</li>
-        <li><span class="ck">✓</span> FAQ handling (services, hours, location)</li>
-        <li><span class="ck">✓</span> Collect name, phone & email</li>
-        <li><span class="ck">✓</span> Basic appointment booking</li>
-        <li><span class="ck">✓</span> Friendly, professional AI voice</li>
-        <li><span class="ck">✓</span> Ready in 3–5 business days</li>
-      </ul>
-      <a href="#contact" class="pcta secondary">Get Started →</a>
+  <h2 class="h reveal">Simple, Honest Pricing — Built Around Your Business</h2>
+  <p class="sub reveal">Every business is different. Your per-minute rate is based on how complex your AI assistant needs to be — the more services, the more it does, and the rate adjusts accordingly. But it always stays affordable.</p>
+
+  <div class="pricing-note reveal">💡 One-time $500 setup fee applies to all plans. After that — you only pay per minute of actual call time. No retainer, no subscription, no surprises.</div>
+
+  <!-- HOW PRICING WORKS -->
+  <div class="pricing-how reveal">
+    <h3>How does the per-minute rate work?</h3>
+    <p>Your rate starts from <strong>$0.10 per minute</strong> and scales up depending on how much your AI assistant needs to handle. Think of it like this:</p>
+    <div class="pricing-scale">
+      <div class="scale-item low">
+        <div class="scale-label">Simple Business</div>
+        <div class="scale-rate">~$0.10–$0.17/min</div>
+        <div class="scale-desc">Basic FAQs, hours, location, simple booking. Few services, straightforward calls.</div>
+      </div>
+      <div class="scale-arrow">→</div>
+      <div class="scale-item mid">
+        <div class="scale-label">Medium Business</div>
+        <div class="scale-rate">~$0.17–$0.40/min</div>
+        <div class="scale-desc">Multiple services, custom flows, calendar integration, SMS & email confirmations.</div>
+      </div>
+      <div class="scale-arrow">→</div>
+      <div class="scale-item high">
+        <div class="scale-label">Complex Business</div>
+        <div class="scale-rate">~$0.40–$0.80/min</div>
+        <div class="scale-desc">Multi-location, CRM integration, multiple agents, advanced custom logic.</div>
+      </div>
     </div>
-    <div class="pcard pop reveal">
-      <div class="pop-badge">Most Popular</div>
-      <div class="plan-name">Professional</div>
-      <div class="plan-price"><sup>$</sup>0.40<sub>/min</sub></div>
-      <div class="plan-unit">Per minute of AI call time</div>
-      <div class="plan-setup">🔧 + $500 one-time setup fee</div>
-      <div class="plan-desc">The full experience — custom voice, advanced booking, email & SMS confirmations, and monthly performance reports.</div>
-      <ul class="plan-feats">
-        <li><span class="ck">✓</span> Everything in Basic</li>
-        <li><span class="ck">✓</span> Custom AI voice & personality</li>
-        <li><span class="ck">✓</span> Full calendar integration</li>
-        <li><span class="ck">✓</span> Email & SMS confirmations</li>
-        <li><span class="ck">✓</span> Emergency call escalation</li>
-        <li><span class="ck">✓</span> Monthly performance report</li>
-        <li><span class="ck">✓</span> Ongoing adjustments & support</li>
-      </ul>
-      <a href="#contact" class="pcta primary">Get Started →</a>
+    <p class="scale-note">The more your AI does, the more value it delivers — and the rate always stays a fraction of what a human receptionist costs.</p>
+  </div>
+
+  <!-- REAL WORLD EXAMPLES -->
+  <div class="examples-section reveal">
+    <h3>Real Business Examples — See What You'd Actually Pay</h3>
+    <p>Let's say your business receives <strong>300 calls a month</strong> with an average call duration of <strong>3 minutes</strong>. That's 900 minutes of call time per month. Here's what that looks like across different rate tiers:</p>
+
+    <div class="examples-grid">
+      <div class="example-card">
+        <div class="ex-rate">$0.10<span>/min</span></div>
+        <div class="ex-label">Simple AI — Basic Services</div>
+        <div class="ex-calc">300 calls × 3 min = 900 min<br/>900 × $0.10 = <strong>$90/month</strong></div>
+        <div class="ex-compare">vs. $3,500+/month for a receptionist</div>
+        <div class="ex-saving">You save ~$3,410/month</div>
+      </div>
+      <div class="example-card featured-ex">
+        <div class="ex-badge">Most Common</div>
+        <div class="ex-rate">$0.17<span>/min</span></div>
+        <div class="ex-label">Standard AI — Dental / Medical Clinic</div>
+        <div class="ex-calc">300 calls × 3 min = 900 min<br/>900 × $0.17 = <strong>$153/month</strong></div>
+        <div class="ex-compare">vs. $3,500+/month for a receptionist</div>
+        <div class="ex-saving">You save ~$3,347/month</div>
+      </div>
+      <div class="example-card">
+        <div class="ex-rate">$0.40<span>/min</span></div>
+        <div class="ex-label">Advanced AI — Multi-Service Business</div>
+        <div class="ex-calc">300 calls × 3 min = 900 min<br/>900 × $0.40 = <strong>$360/month</strong></div>
+        <div class="ex-compare">vs. $3,500+/month for a receptionist</div>
+        <div class="ex-saving">You save ~$3,140/month</div>
+      </div>
+      <div class="example-card">
+        <div class="ex-rate">$0.80<span>/min</span></div>
+        <div class="ex-label">Enterprise AI — Multi-Location + CRM</div>
+        <div class="ex-calc">300 calls × 3 min = 900 min<br/>900 × $0.80 = <strong>$720/month</strong></div>
+        <div class="ex-compare">vs. $3,500+/month for a receptionist</div>
+        <div class="ex-saving">You still save ~$2,780/month</div>
+      </div>
     </div>
-    <div class="pcard reveal">
-      <div class="plan-name">Advanced</div>
-      <div class="plan-price"><sup>$</sup>0.80<sub>/min</sub></div>
-      <div class="plan-unit">Per minute of AI call time</div>
-      <div class="plan-setup">🔧 + $500 one-time setup fee</div>
-      <div class="plan-desc">For multi-location businesses needing deep customisation — CRM integrations, multiple agents, and priority support.</div>
-      <ul class="plan-feats">
-        <li><span class="ck">✓</span> Everything in Professional</li>
-        <li><span class="ck">✓</span> Multi-location support</li>
-        <li><span class="ck">✓</span> CRM & software integration</li>
-        <li><span class="ck">✓</span> Multiple AI agents</li>
-        <li><span class="ck">✓</span> White-label option available</li>
-        <li><span class="ck">✓</span> Priority response & support</li>
-        <li><span class="ck">✓</span> Dedicated setup & account care</li>
-      </ul>
-      <a href="#contact" class="pcta secondary">Get Started →</a>
+
+    <div class="save-box" style="margin-top:2rem;">
+      <div class="big">Even at the highest rate — <span>you save over $2,700/month</span></div>
+      <p>No matter how complex your AI assistant is, it will always cost significantly less than a human receptionist. The math speaks for itself.</p>
     </div>
   </div>
+
+  <!-- WHAT'S INCLUDED -->
+  <div class="included-section reveal">
+    <h3>What's Included in Every Plan</h3>
+    <div class="included-grid">
+      <div class="inc-card"><div class="inc-icon">📞</div><div><h4>24/7 Call Answering</h4><p>Your AI picks up every call, every time — day or night.</p></div></div>
+      <div class="inc-card"><div class="inc-icon">📅</div><div><h4>Appointment Booking</h4><p>Books directly into your calendar without any human involvement.</p></div></div>
+      <div class="inc-card"><div class="inc-icon">📋</div><div><h4>Lead Collection</h4><p>Captures name, phone, and email from every caller.</p></div></div>
+      <div class="inc-card"><div class="inc-icon">❓</div><div><h4>FAQ Handling</h4><p>Answers questions about your services, hours, and location.</p></div></div>
+      <div class="inc-card"><div class="inc-icon">🚨</div><div><h4>Emergency Escalation</h4><p>Detects urgent calls and routes them appropriately.</p></div></div>
+      <div class="inc-card"><div class="inc-icon">✉️</div><div><h4>Confirmation Messages</h4><p>Sends email or SMS confirmations after every booking.</p></div></div>
+    </div>
+  </div>
+
   <div class="setup-box reveal">
     <div class="em">🔧</div>
     <div>
-      <h4>What does the $500 setup fee actually cover?</h4>
-      <p>This is a one-time fee paid before I start building. It covers the complete custom build of your AI agent — training it on your services, working hours, FAQs, and call flows, testing it thoroughly, and launching it on your phone number. You pay this once and your AI is yours forever. After that, you only pay per minute of actual call time. No monthly subscription, no retainer, no surprise invoices.</p>
+      <h4>What does the $500 setup fee cover?</h4>
+      <p>This is a one-time fee paid before I start building. It covers the complete custom build of your AI agent — training it on your services, hours, FAQs, and call flows, testing it, and launching it on your number. You pay this once and your AI is yours forever. After that, you only pay per minute of actual call time. No subscription, no retainer, no hidden invoices.</p>
     </div>
   </div>
 </section>
