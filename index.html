@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Prem Thakur — AI Voice Assistant for Business</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+  background: #ffffff;
+  color: #111827;
+  line-height: 1.7;
+}
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem 5%;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.logo { font-size: 1.1rem; font-weight: 800; color: #111827; text-decoration: none; }
+.logo span { color: #2563eb; }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { font-size: 0.9rem; color: #6b7280; text-decoration: none; font-weight: 500; }
+.nav-links a:hover { color: #111827; }
+.nav-btn { background: #2563eb; color: #fff; padding: 0.55rem 1.4rem; border-radius: 8px; font-size: 0.88rem; font-weight: 600; text-decoration: none; }
+.nav-btn:hover { background: #1d4ed8; }
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 8rem 5% 5rem;
+  background: linear-gradient(160deg, #eff6ff 0%, #ffffff 55%);
+}
+.hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: #eff6ff; border: 1px solid #bfdbfe; color: #2563eb; font-size: 0.82rem; font-weight: 600; padding: 0.35rem 1rem; border-radius: 20px; margin-bottom: 2rem; }
+.badge-dot { width: 7px; height: 7px; background: #22c55e; border-radius: 50%; }
+.hero h1 { font-size: clamp(2.5rem, 5.5vw, 5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem; color: #111827; }
+.hero h1 .blue { color: #2563eb; }
+.hero > p { font-size: 1.1rem; color: #6b7280; max-width: 560px; line-height: 1.85; margin-bottom: 2.5rem; }
+.hero > p strong { color: #111827; font-weight: 600; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
+.btn-blue { background: #2563eb; color: #fff; padding: 0.9rem 2rem; border-radius: 10px; font-size: 0.95rem; font-weight: 700; text-decoration: none; }
+.btn-blue:hover { background: #1d4ed8; }
+.btn-white { background: #fff; color: #374151; border: 1.5px solid #d1d5db; padding: 0.9rem 2rem; border-radius: 10px; font-size: 0.95rem; font-weight: 600; text-decoration: none; }
+.btn-white:hover { border-color: #2563eb; color: #2563eb; }
+.hero-stats { display: flex; gap: 3rem; flex-wrap: wrap; }
+.stat .num { font-size: 2rem; font-weight: 800; color: #111827; }
+.stat .num span { color: #2563eb; }
+.stat .lbl { font-size: 0.8rem; color: #9ca3af; font-weight: 500; }
+section { padding: 5rem 5%; }
+.bg-gray { background: #f9fafb; }
+.divider { height: 1px; background: #e5e7eb; margin: 0 5%; }
+.tag { display: inline-block; background: #eff6ff; color: #2563eb; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 20px; margin-bottom: 1rem; }
+h2.h { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; line-height: 1.2; margin-bottom: 1rem; letter-spacing: -0.02em; }
+p.sub { font-size: 1rem; color: #6b7280; max-width: 560px; line-height: 1.8; margin-bottom: 3rem; }
+.what-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+.wcard { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 2rem; transition: box-shadow 0.2s, transform 0.2s; }
+.wcard:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); transform: translateY(-3px); }
+.wcard .ic { font-size: 2rem; margin-bottom: 1rem; }
+.wcard h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.wcard p { font-size: 0.88rem; color: #6b7280; line-height: 1.7; }
+.compare-grid { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 1.5rem; align-items: center; margin-top: 3rem; }
+.ccard { border-radius: 16px; padding: 2.5rem; }
+.ccard.human { background: #fff5f5; border: 1.5px solid #fecaca; }
+.ccard.ai { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+.ccard-lbl { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.2rem; }
+.ccard.human .ccard-lbl { color: #ef4444; }
+.ccard.ai .ccard-lbl { color: #16a34a; }
+.ccard-price { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 0.3rem; letter-spacing: -0.02em; }
+.ccard.human .ccard-price { color: #ef4444; }
+.ccard.ai .ccard-price { color: #16a34a; }
+.ccard-sub { font-size: 0.82rem; color: #6b7280; margin-bottom: 1.8rem; }
+.clist { list-style: none; }
+.clist li { font-size: 0.88rem; color: #374151; padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; gap: 0.7rem; }
+.clist li:last-child { border-bottom: none; }
+.vs-box { text-align: center; }
+.vs-box span { display: inline-flex; width: 50px; height: 50px; background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 50%; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; color: #6b7280; }
+.save-box { margin-top: 2rem; background: linear-gradient(135deg, #f0fdf4, #eff6ff); border: 1.5px solid #bbf7d0; border-radius: 16px; padding: 2rem; text-align: center; }
+.save-box .big { font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 800; color: #111827; margin-bottom: 0.5rem; }
+.save-box .big span { color: #16a34a; }
+.save-box p { font-size: 0.9rem; color: #6b7280; }
+.pc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+.pc-box { border-radius: 16px; overflow: hidden; border: 1px solid #e5e7eb; }
+.pc-head { padding: 1.2rem 1.8rem; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 0.6rem; }
+.pc-box.pros .pc-head { background: #f0fdf4; color: #16a34a; border-bottom: 1px solid #dcfce7; }
+.pc-box.cons .pc-head { background: #fefce8; color: #d97706; border-bottom: 1px solid #fef9c3; }
+.pc-body { background: #fff; }
+.pc-item { padding: 1.1rem 1.8rem; border-bottom: 1px solid #f3f4f6; display: flex; gap: 1rem; align-items: flex-start; }
+.pc-item:last-child { border-bottom: none; }
+.pc-item .em { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+.pc-item h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.2rem; }
+.pc-item p { font-size: 0.82rem; color: #6b7280; line-height: 1.6; }
+.pricing-note { display: inline-flex; align-items: center; gap: 0.6rem; background: #fefce8; border: 1px solid #fde68a; border-radius: 10px; padding: 0.75rem 1.2rem; font-size: 0.88rem; color: #92400e; font-weight: 500; margin-bottom: 2.5rem; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+.pcard { background: #f9fafb; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 2.5rem; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
+.pcard:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.pcard.pop { background: #fff; border-color: #2563eb; }
+.pop-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #2563eb; color: #fff; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; padding: 0.3rem 1rem; border-radius: 20px; text-transform: uppercase; white-space: nowrap; }
+.plan-name { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #2563eb; margin-bottom: 1rem; }
+.plan-price { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; color: #111827; line-height: 1; }
+.plan-price sup { font-size: 1.2rem; vertical-align: super; }
+.plan-price sub { font-size: 1rem; font-weight: 400; color: #6b7280; }
+.plan-unit { font-size: 0.8rem; color: #9ca3af; margin: 0.3rem 0 0.5rem; }
+.plan-setup { display: inline-block; font-size: 0.78rem; font-weight: 600; color: #374151; background: #f3f4f6; border-radius: 6px; padding: 0.25rem 0.65rem; margin-bottom: 1.2rem; }
+.plan-desc { font-size: 0.88rem; color: #6b7280; line-height: 1.7; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; }
+.plan-feats { list-style: none; margin-bottom: 2rem; }
+.plan-feats li { font-size: 0.88rem; color: #374151; padding: 0.4rem 0; display: flex; gap: 0.7rem; align-items: center; }
+.plan-feats li .ck { color: #16a34a; flex-shrink: 0; font-weight: 700; }
+.pcta { display: block; text-align: center; padding: 0.85rem; border-radius: 10px; font-size: 0.9rem; font-weight: 700; text-decoration: none; }
+.pcta.primary { background: #2563eb; color: #fff; }
+.pcta.primary:hover { background: #1d4ed8; }
+.pcta.secondary { background: #eff6ff; color: #2563eb; }
+.pcta.secondary:hover { background: #dbeafe; }
+.setup-box { margin-top: 2rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 14px; padding: 1.8rem; display: flex; gap: 1rem; align-items: flex-start; }
+.setup-box .em { font-size: 1.5rem; flex-shrink: 0; }
+.setup-box h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+.setup-box p { font-size: 0.85rem; color: #6b7280; line-height: 1.7; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-left h2 { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1.5rem; }
+.about-left h2 span { color: #2563eb; }
+.about-left p { font-size: 0.95rem; color: #6b7280; line-height: 1.9; margin-bottom: 1rem; }
+.about-left p strong { color: #111827; font-weight: 600; }
+.about-quote { margin-top: 1.5rem; border-left: 3px solid #2563eb; padding-left: 1.2rem; font-style: italic; font-size: 1.05rem; color: #374151; line-height: 1.8; }
+.about-right { display: flex; flex-direction: column; gap: 1rem; }
+.acard { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 1.4rem; display: flex; gap: 1rem; align-items: flex-start; }
+.acard:hover { border-color: #93c5fd; }
+.acard .em { font-size: 1.4rem; flex-shrink: 0; }
+.acard h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.2rem; }
+.acard p { font-size: 0.82rem; color: #6b7280; line-height: 1.6; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.contact-left h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1.2rem; }
+.contact-left h2 span { color: #2563eb; }
+.contact-left > p { font-size: 0.95rem; color: #6b7280; line-height: 1.85; margin-bottom: 2rem; }
+.promise-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 14px; padding: 1.5rem; }
+.promise-box h4 { font-size: 0.88rem; font-weight: 700; color: #2563eb; margin-bottom: 0.8rem; }
+.promise-list { list-style: none; }
+.promise-list li { font-size: 0.85rem; color: #374151; padding: 0.3rem 0; display: flex; gap: 0.6rem; }
+.promise-list li::before { content: '✓'; color: #2563eb; font-weight: 700; flex-shrink: 0; }
+.direct-box { background: #f9fafb; border: 1.5px solid #e5e7eb; border-radius: 20px; padding: 3rem 2.5rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+.direct-box .big-em { font-size: 2.5rem; }
+.direct-box h3 { font-size: 1.5rem; font-weight: 800; color: #111827; }
+.direct-box > p { font-size: 0.95rem; color: #6b7280; line-height: 1.8; }
+.email-link { font-size: 1.3rem; font-weight: 700; color: #2563eb; text-decoration: none; border-bottom: 2px solid #bfdbfe; padding-bottom: 0.2rem; word-break: break-all; }
+.email-link:hover { border-color: #2563eb; }
+.open-btn { display: inline-block; background: #2563eb; color: #fff; padding: 0.85rem 2rem; border-radius: 10px; font-size: 0.95rem; font-weight: 700; text-decoration: none; }
+.open-btn:hover { background: #1d4ed8; }
+.tips-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 1.3rem 1.5rem; width: 100%; }
+.tips-box p { font-size: 0.85rem; font-weight: 600; color: #2563eb; margin-bottom: 0.8rem; }
+.tips-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.tips-box ul li { font-size: 0.85rem; color: #374151; display: flex; gap: 0.6rem; }
+.tips-box ul li::before { content: '→'; color: #2563eb; font-weight: 700; flex-shrink: 0; }
+footer { padding: 2rem 5%; border-top: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #9ca3af; flex-wrap: wrap; gap: 1rem; }
+footer a { color: #2563eb; text-decoration: none; }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  nav { padding: 1rem 4%; }
+  section { padding: 4rem 4%; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .vs-box { display: none; }
+  .pc-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Prem<span>Thakur</span></a>
+  <div class="nav-links">
+    <a href="#what">What I Do</a>
+    <a href="#compare">Cost Savings</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#about">About Me</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#contact" class="nav-btn">Get In Touch →</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge"><div class="badge-dot"></div> AI Voice Assistant for Small Businesses</div>
+  <h1>Stop Overpaying<br/>for <span class="blue">Phone Staff.</span><br/>There's a Smarter Way.</h1>
+  <p>I build <strong>AI voice assistants</strong> that answer every call, book appointments, and handle customer questions — 24 hours a day, 7 days a week. For a <strong>fraction of what one employee costs you</strong> every single month.</p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn-blue">Let's Talk — It's Free</a>
+    <a href="#compare" class="btn-white">See the cost savings →</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="num">$0.10<span>–$0.80</span></div><div class="lbl">Per minute of AI call</div></div>
+    <div class="stat"><div class="num">24<span>/7</span></div><div class="lbl">Always available</div></div>
+    <div class="stat"><div class="num">$500</div><div class="lbl">One-time setup — that's it</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">Sick days. Ever.</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="bg-gray" id="what">
+  <div class="tag reveal">What the AI Does</div>
+  <h2 class="h reveal">Your AI Assistant Works While You Focus on Your Business</h2>
+  <p class="sub reveal">Think of it as a receptionist that never sleeps, never gets tired, and handles every call with the same professionalism — every single time.</p>
+  <div class="what-grid">
+    <div class="wcard reveal"><div class="ic">📞</div><h3>Answers Every Inbound Call</h3><p>No missed calls, no voicemail. Your AI picks up instantly and greets callers with your business name and a warm welcome.</p></div>
+    <div class="wcard reveal"><div class="ic">📅</div><h3>Books Appointments</h3><p>Checks availability and books appointments directly into your calendar — without any human involvement needed.</p></div>
+    <div class="wcard reveal"><div class="ic">❓</div><h3>Answers Customer Questions</h3><p>Knows your services, hours, location, and FAQs. Gives accurate answers every time without putting anyone on hold.</p></div>
+    <div class="wcard reveal"><div class="ic">📋</div><h3>Collects Lead Details</h3><p>Gathers the caller's name, phone number, and email — so you have everything you need even if they didn't book.</p></div>
+    <div class="wcard reveal"><div class="ic">🚨</div><h3>Handles Emergencies Smartly</h3><p>Detects urgent calls and escalates them — making sure emergency patients get the right response immediately.</p></div>
+    <div class="wcard reveal"><div class="ic">✉️</div><h3>Sends Confirmations</h3><p>Automatically sends appointment confirmations via email or SMS — reducing no-shows without any extra effort from you.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="compare">
+  <div class="tag reveal">The Real Numbers</div>
+  <h2 class="h reveal">What You're Paying Now vs. What You Could Pay</h2>
+  <p class="sub reveal">Let's be honest about the actual cost of a human receptionist versus an AI assistant.</p>
+  <div class="compare-grid reveal">
+    <div class="ccard human">
+      <div class="ccard-lbl">⚠️ Human Receptionist</div>
+      <div class="ccard-price">$3,500+</div>
+      <div class="ccard-sub">per month — salary alone, before extras</div>
+      <ul class="clist">
+        <li>❌ $3,500–$4,500/month salary</li>
+        <li>❌ Health benefits on top</li>
+        <li>❌ Payroll taxes & HR costs</li>
+        <li>❌ Paid sick days & vacations</li>
+        <li>❌ Training & onboarding time</li>
+        <li>❌ Only works 8 hours a day</li>
+        <li>❌ One call at a time only</li>
+      </ul>
+    </div>
+    <div class="vs-box"><span>VS</span></div>
+    <div class="ccard ai">
+      <div class="ccard-lbl">✅ AI Voice Assistant</div>
+      <div class="ccard-price">$0.10/min</div>
+      <div class="ccard-sub">starting price + $500 one-time setup fee</div>
+      <ul class="clist">
+        <li>✅ Pay only for minutes used</li>
+        <li>✅ No benefits, no taxes, no HR</li>
+        <li>✅ Zero training time needed</li>
+        <li>✅ Never calls in sick</li>
+        <li>✅ No vacation or overtime pay</li>
+        <li>✅ Works 24 hours, 7 days a week</li>
+        <li>✅ Handles multiple calls at once</li>
+      </ul>
+    </div>
+  </div>
+  <div class="save-box reveal">
+    <div class="big">Most businesses save <span>$2,000 – $3,500</span> every month</div>
+    <p>Even with 2,000+ minutes of AI calls per month, you're still spending a fraction of what one receptionist costs. That's real money back in your business.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="bg-gray" id="proscons">
+  <div class="tag reveal">Honest Breakdown</div>
+  <h2 class="h reveal">What an AI Can Do — and What It Can't</h2>
+  <p class="sub reveal">I believe in being upfront. Here's the full picture so you can make the right decision for your business.</p>
+  <div class="pc-grid reveal">
+    <div class="pc-box pros">
+      <div class="pc-head">✅ &nbsp; Strengths of an AI Assistant</div>
+      <div class="pc-body">
+        <div class="pc-item"><div class="em">⚡</div><div><h4>Always Available, 24/7</h4><p>Answers calls at 11pm on a Sunday. Every missed call after hours is a missed customer — your AI makes sure that never happens.</p></div></div>
+        <div class="pc-item"><div class="em">💰</div><div><h4>Saves Thousands Every Month</h4><p>At $0.10–$0.80 per minute, even a high-call-volume business saves $2,000+ per month vs full-time staff.</p></div></div>
+        <div class="pc-item"><div class="em">🎯</div><div><h4>100% Consistent Every Time</h4><p>No bad days, no forgetting scripts. Every caller gets the same professional, friendly experience.</p></div></div>
+        <div class="pc-item"><div class="em">📈</div><div><h4>Scales With Your Business</h4><p>Busy period? Your AI handles 10 calls at once without any extra hiring or cost.</p></div></div>
+        <div class="pc-item"><div class="em">⚙️</div><div><h4>No Management Needed</h4><p>No HR, no payroll, no performance reviews. Set it up once and it runs itself.</p></div></div>
+      </div>
+    </div>
+    <div class="pc-box cons">
+      <div class="pc-head">⚠️ &nbsp; Honest Limitations</div>
+      <div class="pc-body">
+        <div class="pc-item"><div class="em">🧠</div><div><h4>Complex Decisions Still Need Humans</h4><p>Very unusual situations may need a real person. The AI is smart — but not a replacement for human judgment in every case.</p></div></div>
+        <div class="pc-item"><div class="em">❤️</div><div><h4>Deep Emotional Situations</h4><p>For very distressed callers, a human touch is sometimes better. The AI recognises this and escalates when needed.</p></div></div>
+        <div class="pc-item"><div class="em">🗓️</div><div><h4>Setup Takes 3–7 Days</h4><p>I build everything custom — which takes a short time upfront, but means it works perfectly from day one.</p></div></div>
+        <div class="pc-item"><div class="em">🌐</div><div><h4>Needs a Stable Internet Connection</h4><p>Like all cloud software, it requires reliable internet — which most businesses already have.</p></div></div>
+        <div class="pc-item"><div class="em">📝</div><div><h4>Handles Calls — Not In-Person Tasks</h4><p>It's a voice assistant, not a full front desk replacement for physical in-office tasks.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="pricing">
+  <div class="tag reveal">Pricing</div>
+  <h2 class="h reveal">Simple, Transparent Pricing</h2>
+  <p class="sub reveal">All plans include a one-time $500 setup fee. After that, you only pay per minute your AI is on a call. No monthly retainer, no hidden costs, no surprises.</p>
+  <div class="pricing-note reveal">💡 The $500 setup fee is paid once — yours forever. After that you only pay for what you use.</div>
+  <div class="pricing-grid">
+    <div class="pcard reveal">
+      <div class="plan-name">Basic</div>
+      <div class="plan-price"><sup>$</sup>0.10<sub>/min</sub></div>
+      <div class="plan-unit">Per minute of AI call time</div>
+      <div class="plan-setup">🔧 + $500 one-time setup fee</div>
+      <div class="plan-desc">Great for small businesses with moderate call volume. Covers the essentials — answering, FAQs, and lead collection.</div>
+      <ul class="plan-feats">
+        <li><span class="ck">✓</span> 24/7 call answering</li>
+        <li><span class="ck">✓</span> FAQ handling (services, hours, location)</li>
+        <li><span class="ck">✓</span> Collect name, phone & email</li>
+        <li><span class="ck">✓</span> Basic appointment booking</li>
+        <li><span class="ck">✓</span> Friendly, professional AI voice</li>
+        <li><span class="ck">✓</span> Ready in 3–5 business days</li>
+      </ul>
+      <a href="#contact" class="pcta secondary">Get Started →</a>
+    </div>
+    <div class="pcard pop reveal">
+      <div class="pop-badge">Most Popular</div>
+      <div class="plan-name">Professional</div>
+      <div class="plan-price"><sup>$</sup>0.40<sub>/min</sub></div>
+      <div class="plan-unit">Per minute of AI call time</div>
+      <div class="plan-setup">🔧 + $500 one-time setup fee</div>
+      <div class="plan-desc">The full experience — custom voice, advanced booking, email & SMS confirmations, and monthly performance reports.</div>
+      <ul class="plan-feats">
+        <li><span class="ck">✓</span> Everything in Basic</li>
+        <li><span class="ck">✓</span> Custom AI voice & personality</li>
+        <li><span class="ck">✓</span> Full calendar integration</li>
+        <li><span class="ck">✓</span> Email & SMS confirmations</li>
+        <li><span class="ck">✓</span> Emergency call escalation</li>
+        <li><span class="ck">✓</span> Monthly performance report</li>
+        <li><span class="ck">✓</span> Ongoing adjustments & support</li>
+      </ul>
+      <a href="#contact" class="pcta primary">Get Started →</a>
+    </div>
+    <div class="pcard reveal">
+      <div class="plan-name">Advanced</div>
+      <div class="plan-price"><sup>$</sup>0.80<sub>/min</sub></div>
+      <div class="plan-unit">Per minute of AI call time</div>
+      <div class="plan-setup">🔧 + $500 one-time setup fee</div>
+      <div class="plan-desc">For multi-location businesses needing deep customisation — CRM integrations, multiple agents, and priority support.</div>
+      <ul class="plan-feats">
+        <li><span class="ck">✓</span> Everything in Professional</li>
+        <li><span class="ck">✓</span> Multi-location support</li>
+        <li><span class="ck">✓</span> CRM & software integration</li>
+        <li><span class="ck">✓</span> Multiple AI agents</li>
+        <li><span class="ck">✓</span> White-label option available</li>
+        <li><span class="ck">✓</span> Priority response & support</li>
+        <li><span class="ck">✓</span> Dedicated setup & account care</li>
+      </ul>
+      <a href="#contact" class="pcta secondary">Get Started →</a>
+    </div>
+  </div>
+  <div class="setup-box reveal">
+    <div class="em">🔧</div>
+    <div>
+      <h4>What does the $500 setup fee actually cover?</h4>
+      <p>This is a one-time fee paid before I start building. It covers the complete custom build of your AI agent — training it on your services, working hours, FAQs, and call flows, testing it thoroughly, and launching it on your phone number. You pay this once and your AI is yours forever. After that, you only pay per minute of actual call time. No monthly subscription, no retainer, no surprise invoices.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="bg-gray" id="about">
+  <div class="about-grid">
+    <div class="about-left reveal">
+      <div class="tag">About Me</div>
+      <h2>Hi, I'm <span>Prem Thakur</span> —<br/>a real person, not an agency.</h2>
+      <p>I'm a <strong>freelancer from India</strong> — currently finishing my BBA in Finance from Mumbai, and heading to <strong>EDHEC Business School in Lille, France</strong> for my MSc in Strategy, Organisation & Consulting.</p>
+      <p>I started building AI voice assistants because I genuinely believe that <strong>small businesses deserve the same tools that big companies have</strong> — without the huge price tag. Most business owners don't realise how affordable and powerful this technology already is.</p>
+      <p>There's no team behind me, no agency markup, no salesperson. It's just me — working closely with every client, building something that <strong>actually works and actually saves you real money</strong>. Your results are my reputation.</p>
+      <blockquote class="about-quote">"My goal is simple — give you a tool that pays for itself in the first week, and keeps saving you money every month after that."</blockquote>
+    </div>
+    <div class="about-right reveal">
+      <div class="acard"><div class="em">🎓</div><div><h4>BBA in Finance — Mumbai, India</h4><p>Strong foundation in business strategy, financial analysis, and operations management.</p></div></div>
+      <div class="acard"><div class="em">🇫🇷</div><div><h4>MSc — EDHEC Business School, France (Upcoming)</h4><p>MSc in Strategy, Organisation & Consulting at one of Europe's top-ranked business schools.</p></div></div>
+      <div class="acard"><div class="em">🤖</div><div><h4>AI Voice Agent Builder</h4><p>I build fully custom AI agents on platforms like Vapi, Retell AI, and Bland AI — from scratch, specific to your business.</p></div></div>
+      <div class="acard"><div class="em">🌍</div><div><h4>Based in India, Working Globally</h4><p>Currently serving US-based businesses. Flexible with time zones and always responsive.</p></div></div>
+      <div class="acard"><div class="em">🤝</div><div><h4>No Pressure. No Scams. Just Value.</h4><p>I only take on work I know I can deliver results for. If it's not right, I'll tell you honestly before you pay anything.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <div class="tag">Get In Touch</div>
+      <h2>Let's find out how much <span>your business can save.</span></h2>
+      <p>Tell me about your business and what you're struggling with. I'll come back to you within 24 hours with a clear picture of what your AI assistant would look like — and a free demo so you can hear it before committing to anything.</p>
+      <div class="promise-box">
+        <h4>Here's my promise to you:</h4>
+        <ul class="promise-list">
+          <li>I respond within 24 hours — always</li>
+          <li>You get a free custom demo before paying anything</li>
+          <li>No pressure, no pushy sales tactics — ever</li>
+          <li>If it's not right for your business, I'll say so honestly</li>
+          <li>$500 setup fee is the only upfront cost — nothing hidden</li>
+        </ul>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="direct-box">
+        <div class="big-em">✉️</div>
+        <h3>Drop me a direct email</h3>
+        <p>No forms, no fuss. Write to me and I'll personally reply within 24 hours.</p>
+        <a href="mailto:premt9661@gmail.com" class="email-link">premt9661@gmail.com</a>
+        <a href="mailto:premt9661@gmail.com" class="open-btn">Open in Email App →</a>
+        <div class="tips-box">
+          <p>💡 To get a faster reply — mention in your email:</p>
+          <ul>
+            <li>Your business name and type</li>
+            <li>How many calls you receive per day</li>
+            <li>Your biggest challenge right now</li>
+            <li>Your phone number if you'd prefer a call</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Prem Thakur — AI Voice Assistants for Business</span>
+  <span>Mumbai, India → <a href="mailto:premt9661@gmail.com">premt9661@gmail.com</a></span>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 60);
+  });
+}, { threshold: 0.07 });
+reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
